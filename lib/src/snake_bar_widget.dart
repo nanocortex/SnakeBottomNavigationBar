@@ -329,7 +329,7 @@ class _SnakeNavigationBar extends StatelessWidget {
                       notifier: notifier,
                       animationDuration: animationDuration ?? const Duration(milliseconds: 200),
                       delayTransition: delayTransition ?? const Duration(milliseconds: 50),
-                      indicatorHeight: indicatorHeight ?? height,
+                      indicatorHeight: indicatorHeight ?? 4,
                       snakeCurve: snakeCurve ?? Curves.easeInOut,
                     ),
                     Row(children: tiles),
