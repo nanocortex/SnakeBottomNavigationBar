@@ -77,6 +77,11 @@ class SnakeNavigationBar extends StatelessWidget {
   /// BottomNavigationBar height default is [kBottomNavigationBarHeight]
   final double height;
 
+  final Duration? animationDuration;
+  final Duration? delayTransition;
+  final double? indicatorHeight;
+  final Curve? snakeCurve;
+
   SnakeNavigationBar._(
     this._selectionStyle, {
     Key? key,
@@ -98,6 +103,10 @@ class SnakeNavigationBar extends StatelessWidget {
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
     required this.height,
+    this.animationDuration,
+    this.delayTransition,
+    this.indicatorHeight,
+    this.snakeCurve,
   })  : showSelectedLabels = (snakeShape.type == SnakeShapeType.circle && showSelectedLabels) ? false : showSelectedLabels,
         super(key: key);
 
@@ -121,6 +130,10 @@ class SnakeNavigationBar extends StatelessWidget {
     TextStyle? selectedLabelStyle,
     TextStyle? unselectedLabelStyle,
     double? height,
+    Duration? animationDuration,
+    Duration? delayTransition,
+    double? indicatorHeight,
+    Curve? snakeCurve,
   }) =>
       SnakeNavigationBar._(
         SelectionStyle.color,
@@ -143,6 +156,10 @@ class SnakeNavigationBar extends StatelessWidget {
         selectedLabelStyle: selectedLabelStyle,
         unselectedLabelStyle: unselectedLabelStyle,
         height: height ?? kBottomNavigationBarHeight,
+        animationDuration: animationDuration,
+        delayTransition: delayTransition,
+        indicatorHeight: indicatorHeight,
+        snakeCurve: snakeCurve,
       );
 
   factory SnakeNavigationBar.gradient({
@@ -165,6 +182,10 @@ class SnakeNavigationBar extends StatelessWidget {
     TextStyle? selectedLabelStyle,
     TextStyle? unselectedLabelStyle,
     double? height,
+    Duration? animationDuration,
+    Duration? delayTransition,
+    double? indicatorHeight,
+    Curve? snakeCurve,
   }) =>
       SnakeNavigationBar._(
         SelectionStyle.gradient,
@@ -187,6 +208,10 @@ class SnakeNavigationBar extends StatelessWidget {
         selectedLabelStyle: selectedLabelStyle,
         unselectedLabelStyle: unselectedLabelStyle,
         height: height ?? kBottomNavigationBarHeight,
+        animationDuration: animationDuration,
+        delayTransition: delayTransition,
+        indicatorHeight: indicatorHeight,
+        snakeCurve: snakeCurve,
       );
 
   SnakeBottomBarThemeData _createTheme(BuildContext context) {
@@ -218,6 +243,10 @@ class SnakeNavigationBar extends StatelessWidget {
         items: items,
         height: height,
         notifier: SelectionNotifier(currentIndex, onTap),
+        animationDuration: animationDuration,
+        delayTransition: delayTransition,
+        indicatorHeight: indicatorHeight,
+        snakeCurve: snakeCurve,
       ),
     );
   }
@@ -232,6 +261,10 @@ class _SnakeNavigationBar extends StatelessWidget {
   final SnakeBarBehaviour behaviour;
   final List<BottomNavigationBarItem>? items;
   final SelectionNotifier notifier;
+  final Duration? animationDuration;
+  final Duration? delayTransition;
+  final double? indicatorHeight;
+  final Curve? snakeCurve;
 
   const _SnakeNavigationBar({
     Key? key,
@@ -243,6 +276,10 @@ class _SnakeNavigationBar extends StatelessWidget {
     required this.items,
     required this.notifier,
     required this.height,
+    this.animationDuration,
+    this.delayTransition,
+    this.indicatorHeight,
+    this.snakeCurve,
   }) : super(key: key);
 
   @override
@@ -290,6 +327,10 @@ class _SnakeNavigationBar extends StatelessWidget {
                       height: height,
                       widgetEdgePadding: padding.left + padding.right,
                       notifier: notifier,
+                      animationDuration: animationDuration ?? const Duration(milliseconds: 200),
+                      delayTransition: delayTransition ?? const Duration(milliseconds: 50),
+                      indicatorHeight: indicatorHeight ?? height,
+                      snakeCurve: snakeCurve ?? Curves.easeInOut,
                     ),
                     Row(children: tiles),
                   ],
