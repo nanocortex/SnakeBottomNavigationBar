@@ -98,10 +98,7 @@ class SnakeNavigationBar extends StatelessWidget {
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
     required this.height,
-  })  : showSelectedLabels =
-            (snakeShape.type == SnakeShapeType.circle && showSelectedLabels)
-                ? false
-                : showSelectedLabels,
+  })  : showSelectedLabels = (snakeShape.type == SnakeShapeType.circle && showSelectedLabels) ? false : showSelectedLabels,
         super(key: key);
 
   factory SnakeNavigationBar.color({
@@ -195,17 +192,10 @@ class SnakeNavigationBar extends StatelessWidget {
   SnakeBottomBarThemeData _createTheme(BuildContext context) {
     final theme = BottomNavigationBarTheme.of(context);
     return SnakeBottomBarThemeData(
-      snakeGradient: snakeViewGradient ??
-          Theme.of(context).colorScheme.secondary.toGradient,
-      backgroundGradient: backgroundGradient ??
-          theme.backgroundColor?.toGradient ??
-          Theme.of(context).cardColor.toGradient,
-      selectedItemGradient: selectedItemGradient ??
-          theme.selectedItemColor?.toGradient ??
-          Theme.of(context).cardColor.toGradient,
-      unselectedItemGradient: unselectedItemGradient ??
-          theme.unselectedItemColor?.toGradient ??
-          Theme.of(context).colorScheme.secondary.toGradient,
+      snakeGradient: snakeViewGradient ?? Theme.of(context).colorScheme.secondary.toGradient,
+      backgroundGradient: backgroundGradient ?? theme.backgroundColor?.toGradient ?? Theme.of(context).cardColor.toGradient,
+      selectedItemGradient: selectedItemGradient ?? theme.selectedItemColor?.toGradient ?? Theme.of(context).cardColor.toGradient,
+      unselectedItemGradient: unselectedItemGradient ?? theme.unselectedItemColor?.toGradient ?? Theme.of(context).colorScheme.secondary.toGradient,
       showSelectedLabels: showSelectedLabels,
       showUnselectedLabels: showUnselectedLabels,
       snakeShape: snakeShape,
@@ -261,16 +251,15 @@ class _SnakeNavigationBar extends StatelessWidget {
 
     final List<Widget> tiles = items!
         .mapIndexed((index, item) => SnakeItemTile(
-              icon:
-                  notifier.currentIndex == index ? item.activeIcon : item.icon,
+              icon: notifier.currentIndex == index ? item.activeIcon : item.icon,
               label: item.label,
               position: index,
               isSelected: notifier.currentIndex == index,
-              onTap: () { 
-                  if (label == null || label.isEmpty || item.icon.size == 0) {
-                      return;
-                  }
-                  notifier.selectIndex(index);
+              onTap: () {
+                if ((item.label != null && item.label!.isEmpty) || (item.icon as Icon).size == 0) {
+                  return;
+                }
+                notifier.selectIndex(index);
               },
             ))
         .toList();
