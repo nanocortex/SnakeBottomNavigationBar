@@ -77,12 +77,7 @@ class SnakeItemTile extends StatelessWidget {
             child: icon!,
           );
 
-    return isIndicatorStyle(theme)
-        ? Opacity(
-            opacity: isSelected! ? 1 : 0.6,
-            child: iconWidget,
-          )
-        : iconWidget;
+    return  iconWidget;
   }
 
   Widget _getThemedTitle(SnakeBottomBarThemeData theme) {
@@ -103,11 +98,6 @@ class SnakeItemTile extends StatelessWidget {
             style: textTheme.copyWith(color: itemGradient.colors.first),
           );
 
-    return isIndicatorStyle(theme)
-        ? Opacity(
-            opacity: isSelected! ? 1 : 0.6,
-            child: labelWidget,
-          )
-        : labelWidget;
+    return  labelWidget;
   }
 }
