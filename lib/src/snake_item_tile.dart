@@ -11,6 +11,7 @@ class SnakeItemTile extends StatelessWidget {
   final int? position;
   final bool? isSelected;
   final VoidCallback? onTap;
+  final int? badgeCount;
 
   const SnakeItemTile({
     Key? key,
@@ -19,10 +20,10 @@ class SnakeItemTile extends StatelessWidget {
     this.position,
     this.isSelected,
     this.onTap,
+    this.badgeCount,
   }) : super(key: key);
 
-  bool isIndicatorStyle(SnakeBottomBarThemeData theme) =>
-      theme.snakeShape.type == SnakeShapeType.indicator;
+  bool isIndicatorStyle(SnakeBottomBarThemeData theme) => theme.snakeShape.type == SnakeShapeType.indicator;
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +34,43 @@ class SnakeItemTile extends StatelessWidget {
         onTap: onTap,
         behavior: HitTestBehavior.translucent,
         child: Center(
-          child: Container(
-            margin: theme.snakeShape.padding,
-            child: () {
-              if (isSelected!) {
-                return theme.showSelectedLabels && label != null
-                    ? _getLabeledItem(theme)
-                    : _getThemedIcon(theme);
-              } else {
-                return theme.showUnselectedLabels && label != null
-                    ? _getLabeledItem(theme)
-                    : _getThemedIcon(theme);
-              }
-            }(),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                margin: theme.snakeShape.padding,
+                child: () {
+                  if (isSelected!) {
+                    return theme.showSelectedLabels && label != null ? _getLabeledItem(theme) : _getThemedIcon(theme);
+                  } else {
+                    return theme.showUnselectedLabels && label != null ? _getLabeledItem(theme) : _getThemedIcon(theme);
+                  }
+                }(),
+              ),
+              if (badgeCount != null)
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    constraints: BoxConstraints(
+                      minWidth: 12,
+                      minHeight: 12,
+                    ),
+                    child: Text(
+                      badgeCount!.toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 8,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+            ],
           ),
         ),
       ),
@@ -64,8 +89,7 @@ class SnakeItemTile extends StatelessWidget {
   }
 
   Widget _getThemedIcon(SnakeBottomBarThemeData theme) {
-    final itemGradient =
-        isSelected! ? theme.selectedItemGradient : theme.unselectedItemGradient;
+    final itemGradient = isSelected! ? theme.selectedItemGradient : theme.unselectedItemGradient;
     final iconWidget = theme.selectionStyle == SelectionStyle.gradient
         ? ShaderMask(
             blendMode: BlendMode.srcIn,
@@ -77,27 +101,23 @@ class SnakeItemTile extends StatelessWidget {
             child: icon!,
           );
 
-    return  iconWidget;
+    return iconWidget;
   }
 
   Widget _getThemedTitle(SnakeBottomBarThemeData theme) {
-    final textTheme =
-        (isSelected! ? theme.selectedLabelStyle : theme.unselectedLabelStyle) ??
-            const TextStyle();
-    final itemGradient =
-        isSelected! ? theme.selectedItemGradient : theme.unselectedItemGradient;
+    final textTheme = (isSelected! ? theme.selectedLabelStyle : theme.unselectedLabelStyle) ?? const TextStyle();
+    final itemGradient = isSelected! ? theme.selectedItemGradient : theme.unselectedItemGradient;
 
     final labelWidget = theme.selectionStyle == SelectionStyle.gradient
         ? ShaderMask(
             shaderCallback: itemGradient.defaultShader,
-            child: Text(label ?? '',
-                style: textTheme.copyWith(color: Colors.white)),
+            child: Text(label ?? '', style: textTheme.copyWith(color: Colors.white)),
           )
         : Text(
             label ?? '',
             style: textTheme.copyWith(color: itemGradient.colors.first),
           );
 
-    return  labelWidget;
+    return labelWidget;
   }
 }

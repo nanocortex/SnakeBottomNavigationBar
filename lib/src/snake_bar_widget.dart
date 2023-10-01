@@ -292,6 +292,7 @@ class _SnakeNavigationBar extends StatelessWidget {
               label: item.label,
               position: index,
               isSelected: notifier.currentIndex == index,
+              badgeCount: item.tooltip != null && item.tooltip!.isNotEmpty ? int.parse(item.tooltip!) : null,
               onTap: () {
                 if ((item.label != null && item.label!.isEmpty) || (item.icon as Icon).size == 0) {
                   return;
