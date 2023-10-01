@@ -37,7 +37,7 @@ class _SnakeNavigationBarExampleScreenState extends State<SnakeNavigationBarExam
   EdgeInsets padding = const EdgeInsets.all(12);
 
   int _selectedItemPosition = 2;
-  SnakeShape snakeShape = SnakeShape.circle;
+  SnakeShape snakeShape = SnakeShape.indicator;
 
   bool showSelectedLabels = false;
   bool showUnselectedLabels = false;

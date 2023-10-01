@@ -38,7 +38,8 @@ class SnakeItemTile extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Container(
-                margin: theme.snakeShape.padding,
+                margin: isIndicatorStyle(theme) ? EdgeInsets.all(6) : theme.snakeShape.padding,
+                //theme.snakeShape.padding,
                 child: () {
                   if (isSelected!) {
                     return theme.showSelectedLabels && label != null ? _getLabeledItem(theme) : _getThemedIcon(theme);
@@ -49,31 +50,6 @@ class SnakeItemTile extends StatelessWidget {
               ),
               if (badgeBuilder != null)
                 badgeBuilder!(context),
-              // if (badgeCount != null)
-              //   Positioned(
-              //     right: 0,
-              //     top: 0,
-              //     child: Container(
-              //       padding: const EdgeInsets.all(2),
-              //       decoration: BoxDecoration(
-              //         color: theme.badgeColor,
-              //         borderRadius: BorderRadius.circular(6),
-              //       ),
-              //       constraints: const BoxConstraints(
-              //         minWidth: 14,
-              //         minHeight: 12,
-              //         maxHeight: 14,
-              //       ),
-              //       child: Text(
-              //         badgeCount!.toString(),
-              //         style: const TextStyle(
-              //           color: Colors.white,
-              //           fontSize: 8,
-              //         ),
-              //         textAlign: TextAlign.center,
-              //       ),
-              //     ),
-              //   ),
             ],
           ),
         ),
