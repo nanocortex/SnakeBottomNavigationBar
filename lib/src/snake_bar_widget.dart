@@ -82,6 +82,8 @@ class SnakeNavigationBar extends StatelessWidget {
   final double? indicatorHeight;
   final Curve? snakeCurve;
 
+  final Color? badgeColor;
+
   SnakeNavigationBar._(
     this._selectionStyle, {
     Key? key,
@@ -107,6 +109,7 @@ class SnakeNavigationBar extends StatelessWidget {
     this.delayTransition,
     this.indicatorHeight,
     this.snakeCurve,
+    this.badgeColor,
   })  : showSelectedLabels = (snakeShape.type == SnakeShapeType.circle && showSelectedLabels) ? false : showSelectedLabels,
         super(key: key);
 
@@ -134,6 +137,7 @@ class SnakeNavigationBar extends StatelessWidget {
     Duration? delayTransition,
     double? indicatorHeight,
     Curve? snakeCurve,
+    Color? badgeColor,
   }) =>
       SnakeNavigationBar._(
         SelectionStyle.color,
@@ -160,6 +164,7 @@ class SnakeNavigationBar extends StatelessWidget {
         delayTransition: delayTransition,
         indicatorHeight: indicatorHeight,
         snakeCurve: snakeCurve,
+        badgeColor: badgeColor,
       );
 
   factory SnakeNavigationBar.gradient({
@@ -186,6 +191,7 @@ class SnakeNavigationBar extends StatelessWidget {
     Duration? delayTransition,
     double? indicatorHeight,
     Curve? snakeCurve,
+    Color? badgeColor,
   }) =>
       SnakeNavigationBar._(
         SelectionStyle.gradient,
@@ -212,6 +218,7 @@ class SnakeNavigationBar extends StatelessWidget {
         delayTransition: delayTransition,
         indicatorHeight: indicatorHeight,
         snakeCurve: snakeCurve,
+        badgeColor: badgeColor,
       );
 
   SnakeBottomBarThemeData _createTheme(BuildContext context) {
@@ -227,6 +234,7 @@ class SnakeNavigationBar extends StatelessWidget {
       selectionStyle: _selectionStyle,
       selectedLabelStyle: selectedLabelStyle,
       unselectedLabelStyle: unselectedLabelStyle,
+      badgeColor: badgeColor ?? Colors.red,
     );
   }
 

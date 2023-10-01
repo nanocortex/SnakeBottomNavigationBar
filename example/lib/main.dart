@@ -114,6 +114,7 @@ class _SnakeNavigationBarExampleScreenState
         snakeShape: snakeShape,
         shape: bottomBarShape,
         padding: padding,
+        badgeColor: Colors.green,
 
         ///configuration for SnakeNavigationBar.color
         snakeViewColor: selectedColor,
@@ -138,7 +139,7 @@ class _SnakeNavigationBarExampleScreenState
               icon: Icon(CustomIcons.calendar), label: 'calendar'),
           BottomNavigationBarItem(icon: Icon(CustomIcons.home), label: 'home'),
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.podcasts), label: 'microphone'),
+              icon: Icon(CustomIcons.podcasts), label: 'microphone', tooltip: '33346'),
           BottomNavigationBarItem(
               icon: Icon(CustomIcons.search), label: 'search')
         ],

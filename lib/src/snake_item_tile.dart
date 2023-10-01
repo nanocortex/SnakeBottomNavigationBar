@@ -50,19 +50,21 @@ class SnakeItemTile extends StatelessWidget {
               if (badgeCount != null)
                 Positioned(
                   right: 0,
+                  top: 0,
                   child: Container(
-                    padding: EdgeInsets.all(1),
+                    padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: theme.badgeColor,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    constraints: BoxConstraints(
-                      minWidth: 12,
+                    constraints: const BoxConstraints(
+                      minWidth: 14,
                       minHeight: 12,
+                      maxHeight: 14,
                     ),
                     child: Text(
                       badgeCount!.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 8,
                       ),

@@ -32,6 +32,7 @@ class SnakeBottomBarThemeData {
   final SelectionStyle selectionStyle;
   final TextStyle? selectedLabelStyle;
   final TextStyle? unselectedLabelStyle;
+  final Color? badgeColor;
 
   SnakeBottomBarThemeData({
     required this.snakeGradient,
@@ -44,5 +45,6 @@ class SnakeBottomBarThemeData {
     required this.selectionStyle,
     required this.selectedLabelStyle,
     required this.unselectedLabelStyle,
+    required this.badgeColor,
   });
 }
