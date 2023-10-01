@@ -82,7 +82,8 @@ class SnakeNavigationBar extends StatelessWidget {
   final double? indicatorHeight;
   final Curve? snakeCurve;
 
-  final Color? badgeColor;
+  final WidgetBuilder? badgeBuilder;
+  final int? badgeIndex;
 
   SnakeNavigationBar._(
     this._selectionStyle, {
@@ -109,7 +110,8 @@ class SnakeNavigationBar extends StatelessWidget {
     this.delayTransition,
     this.indicatorHeight,
     this.snakeCurve,
-    this.badgeColor,
+    this.badgeBuilder,
+    this.badgeIndex,
   })  : showSelectedLabels = (snakeShape.type == SnakeShapeType.circle && showSelectedLabels) ? false : showSelectedLabels,
         super(key: key);
 
@@ -137,7 +139,8 @@ class SnakeNavigationBar extends StatelessWidget {
     Duration? delayTransition,
     double? indicatorHeight,
     Curve? snakeCurve,
-    Color? badgeColor,
+    WidgetBuilder? badgeBuilder,
+    int? badgeIndex,
   }) =>
       SnakeNavigationBar._(
         SelectionStyle.color,
@@ -164,7 +167,8 @@ class SnakeNavigationBar extends StatelessWidget {
         delayTransition: delayTransition,
         indicatorHeight: indicatorHeight,
         snakeCurve: snakeCurve,
-        badgeColor: badgeColor,
+        badgeBuilder: badgeBuilder,
+        badgeIndex: badgeIndex,
       );
 
   factory SnakeNavigationBar.gradient({
@@ -191,7 +195,8 @@ class SnakeNavigationBar extends StatelessWidget {
     Duration? delayTransition,
     double? indicatorHeight,
     Curve? snakeCurve,
-    Color? badgeColor,
+    WidgetBuilder? badgeBuilder,
+    int? badgeIndex,
   }) =>
       SnakeNavigationBar._(
         SelectionStyle.gradient,
@@ -218,7 +223,8 @@ class SnakeNavigationBar extends StatelessWidget {
         delayTransition: delayTransition,
         indicatorHeight: indicatorHeight,
         snakeCurve: snakeCurve,
-        badgeColor: badgeColor,
+        badgeBuilder: badgeBuilder,
+        badgeIndex: badgeIndex,
       );
 
   SnakeBottomBarThemeData _createTheme(BuildContext context) {
@@ -234,7 +240,6 @@ class SnakeNavigationBar extends StatelessWidget {
       selectionStyle: _selectionStyle,
       selectedLabelStyle: selectedLabelStyle,
       unselectedLabelStyle: unselectedLabelStyle,
-      badgeColor: badgeColor ?? Colors.red,
     );
   }
 
@@ -255,6 +260,8 @@ class SnakeNavigationBar extends StatelessWidget {
         delayTransition: delayTransition,
         indicatorHeight: indicatorHeight,
         snakeCurve: snakeCurve,
+        badgeBuilder: badgeBuilder,
+        badgeIndex: badgeIndex,
       ),
     );
   }
@@ -273,6 +280,8 @@ class _SnakeNavigationBar extends StatelessWidget {
   final Duration? delayTransition;
   final double? indicatorHeight;
   final Curve? snakeCurve;
+  final WidgetBuilder? badgeBuilder;
+  final int? badgeIndex;
 
   const _SnakeNavigationBar({
     Key? key,
@@ -288,6 +297,8 @@ class _SnakeNavigationBar extends StatelessWidget {
     this.delayTransition,
     this.indicatorHeight,
     this.snakeCurve,
+    this.badgeBuilder,
+    this.badgeIndex,
   }) : super(key: key);
 
   @override
@@ -300,7 +311,7 @@ class _SnakeNavigationBar extends StatelessWidget {
               label: item.label,
               position: index,
               isSelected: notifier.currentIndex == index,
-              badgeCount: item.tooltip != null && item.tooltip!.isNotEmpty ? int.parse(item.tooltip!) : null,
+              badgeBuilder: badgeIndex != null && badgeIndex == index ? badgeBuilder : null,
               onTap: () {
                 if ((item.label != null && item.label!.isEmpty) || (item.icon as Icon).size == 0) {
                   return;

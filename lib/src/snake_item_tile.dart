@@ -11,7 +11,7 @@ class SnakeItemTile extends StatelessWidget {
   final int? position;
   final bool? isSelected;
   final VoidCallback? onTap;
-  final int? badgeCount;
+  final WidgetBuilder? badgeBuilder;
 
   const SnakeItemTile({
     Key? key,
@@ -20,7 +20,7 @@ class SnakeItemTile extends StatelessWidget {
     this.position,
     this.isSelected,
     this.onTap,
-    this.badgeCount,
+    this.badgeBuilder,
   }) : super(key: key);
 
   bool isIndicatorStyle(SnakeBottomBarThemeData theme) => theme.snakeShape.type == SnakeShapeType.indicator;
@@ -47,31 +47,33 @@ class SnakeItemTile extends StatelessWidget {
                   }
                 }(),
               ),
-              if (badgeCount != null)
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      color: theme.badgeColor,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    constraints: const BoxConstraints(
-                      minWidth: 14,
-                      minHeight: 12,
-                      maxHeight: 14,
-                    ),
-                    child: Text(
-                      badgeCount!.toString(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
+              if (badgeBuilder != null)
+                badgeBuilder!(context),
+              // if (badgeCount != null)
+              //   Positioned(
+              //     right: 0,
+              //     top: 0,
+              //     child: Container(
+              //       padding: const EdgeInsets.all(2),
+              //       decoration: BoxDecoration(
+              //         color: theme.badgeColor,
+              //         borderRadius: BorderRadius.circular(6),
+              //       ),
+              //       constraints: const BoxConstraints(
+              //         minWidth: 14,
+              //         minHeight: 12,
+              //         maxHeight: 14,
+              //       ),
+              //       child: Text(
+              //         badgeCount!.toString(),
+              //         style: const TextStyle(
+              //           color: Colors.white,
+              //           fontSize: 8,
+              //         ),
+              //         textAlign: TextAlign.center,
+              //       ),
+              //     ),
+              //   ),
             ],
           ),
         ),
